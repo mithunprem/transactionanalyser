@@ -1,6 +1,9 @@
-import React, { Component  } from "react"
+import React, { Component, Fragment  } from 'react';
 import Papa from 'papaparse';
+import Input from '../../Components/Input';
+import Button from '../../Components/Button';
 import transactionscsv from '../../Data/transactions.csv';
+import './transactionAnalyser.scss'
 
 class TransactionAnalyser extends Component {
 
@@ -25,7 +28,21 @@ class TransactionAnalyser extends Component {
   }
 
   render() {
-    return <h3>Transaction Analyser</h3>;
+    return (
+      <Fragment>
+        <div className="transaction-analyser">
+          <h3>Transaction Analyser</h3>
+          <p>Please enter the following details.</p>
+          <form onSubmit={this.calculate}>
+            <Input type="text" placeholder="Account ID" name="accountId" />
+            <Input type="datetime-local" placeholder="From" name="fromDate" />
+            <Input type="datetime-local" placeholder="To" name="toDate" />
+            <Button type="submit" label="Calculate" />
+          </form>
+          <p>Click calculate to show the balance</p>
+        </div>
+      </Fragment>
+    )
   }
 }
 

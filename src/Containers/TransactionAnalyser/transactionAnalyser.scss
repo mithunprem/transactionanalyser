@@ -1,0 +1,19 @@
+.transaction-analyser {
+  background-color: #373d4a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  form {
+    width: 400px;
+    text-align: left;
+
+    label {
+      font-size: 14px;
+      margin: 0 0 8px;
+    }
+  }
+}
