@@ -1,8 +1,8 @@
 import React, { Component, Fragment  } from 'react';
-import moment from 'moment';
 import Form from '../../Components/Form';
 import Balance from '../../Components/Balance';
 import parseCsvFile from '../../Utils/csvParser';
+import balanceCalculator from '../../Utils/balanceCalculator';
 import transactionscsv from '../../Data/transactions.csv';
 import './transactionAnalyser.scss'
 
@@ -29,6 +29,11 @@ export default class TransactionAnalyser extends Component {
     );
   }
 
+  calculate = formData => {
+    const { transactions } = this.state;
+    const balance = balanceCalculator(transactions, formData);
+
+    this.setState({ balance });
   }
 
   render() {
