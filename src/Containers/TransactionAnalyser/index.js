@@ -1,14 +1,15 @@
 import React, { Component, Fragment  } from 'react';
-import Papa from 'papaparse';
 import moment from 'moment';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
+import parseCsvFile from '../../Utils/csvParser';
 import transactionscsv from '../../Data/transactions.csv';
 import './transactionAnalyser.scss'
 
 class TransactionAnalyser extends Component {
 
   state = {
+    isTransactionDetailsLoading: false,
     transactions: [],
     form: {
       accountId: "ACC334455",
@@ -19,19 +20,21 @@ class TransactionAnalyser extends Component {
   }
 
   componentDidMount() {
-    Papa.parse(transactionscsv, {
-      header: true,
-      download: true,
-      skipEmptyLines: true,
-      dynamicTyping: true,
-      complete: this.setTransactionsToState
-    })
+    this.setState(
+      {
+        isTransactionDetailsLoading: true
+      },
+      async () => {
+        const transactions = await parseCsvFile(transactionscsv);
+        this.setState({
+          isTransactionDetailsLoading: false,
+          transactions
+        });
+      }
+    );
+  }
   }
 
-  setTransactionsToState = ({ data: transactions }) => {
-    if( transactions && transactions.length > 0 ) {
-      this.setState({ transactions });
-    }
   }
 
   render() {
