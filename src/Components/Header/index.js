@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import './header.scss';
 
-function Header () {
+const Header = () => {
   return (
     <Fragment>
       <header className="transaction-analyser-header">
