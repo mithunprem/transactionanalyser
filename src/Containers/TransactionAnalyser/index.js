@@ -1,6 +1,7 @@
 import React, { Component, Fragment  } from 'react';
 import moment from 'moment';
 import Form from '../../Components/Form';
+import Balance from '../../Components/Balance';
 import parseCsvFile from '../../Utils/csvParser';
 import transactionscsv from '../../Data/transactions.csv';
 import './transactionAnalyser.scss'
@@ -38,7 +39,7 @@ export default class TransactionAnalyser extends Component {
           <h2>Relative account balance</h2>
           <p>Please enter the following details.</p>
           <Form onSubmit={this.calculate} />
-          <p>{balance ? `Balance: $${String(balance.toFixed(2)).toLocaleString()}` : "Click calculate to show the balance."}</p>
+          <Balance balance={balance} />
         </div>
       </Fragment>
     )
