@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './index.scss';
+import './header.scss';
 
 function Header () {
   return (
