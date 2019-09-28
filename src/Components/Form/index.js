@@ -1,0 +1,45 @@
+import React, { Component, Fragment } from 'react';
+import Input from '../../Components/Input';
+import Button from '../../Components/Button';
+import './form.scss';
+
+export default class Form extends Component {
+  state = {
+    form: {
+      accountId: "ACC334455",
+      fromDate: "2018-10-20T00:00",
+      toDate: "2018-10-20T19:00"
+    }
+  }
+
+  handleChange = event => {
+    const { value, name } = event.target;
+
+    this.setState(prevState => ({
+      form: {
+        ...prevState.form,
+        [name]: value
+      }
+    }))
+  }
+
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit(this.state.form);
+  }
+
+  render() {
+    const { accountId, fromDate, toDate } = this.state.form;
+
+    return (
+      <Fragment>
+        <form onSubmit={this.onSubmit}>
+          <Input type="text" placeholder="Account ID" name="accountId" value={accountId} onChange={this.handleChange} />
+          <Input type="datetime-local" placeholder="From" name="fromDate" value={fromDate} onChange={this.handleChange} />
+          <Input type="datetime-local" placeholder="To" name="toDate" value={toDate} onChange={this.handleChange} />
+          <Button type="submit" label="Calculate" />
+        </form>
+      </Fragment>
+    )
+  }
+}
