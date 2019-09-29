@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render without throwing an error 1`] = `
+<header
+  className="transaction-analyser-header"
+>
+  <h5
+    className="ml-3 header-text"
+  >
+    Financial Transaction Analyser
+  </h5>
+</header>
+`;
