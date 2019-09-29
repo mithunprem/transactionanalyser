@@ -14,6 +14,7 @@ exports[`Form should render without throwing an error 1`] = `
     </label>
     <br />
     <input
+      className=""
       name="accountId"
       onChange={[Function]}
       placeholder="Account ID"
@@ -27,15 +28,16 @@ exports[`Form should render without throwing an error 1`] = `
     <label
       htmlFor="fromDate"
     >
-      From
+      From Date
     </label>
     <br />
     <input
+      className=""
       name="fromDate"
       onChange={[Function]}
-      placeholder="From"
-      type="datetime-local"
-      value="2018-10-20T00:00"
+      placeholder="From Date"
+      type="text"
+      value="20/10/2018 12:00:00"
     />
   </div>
   <div
@@ -44,19 +46,26 @@ exports[`Form should render without throwing an error 1`] = `
     <label
       htmlFor="toDate"
     >
-      To
+      To Date
     </label>
     <br />
     <input
+      className=""
       name="toDate"
       onChange={[Function]}
-      placeholder="To"
-      type="datetime-local"
-      value="2018-10-20T19:00"
+      placeholder="To Date"
+      type="text"
+      value="20/10/2018 19:00:00"
     />
+  </div>
+  <div
+    className="m-2"
+  >
+    
   </div>
   <button
     className="mt-3 button"
+    disabled={false}
     onClick={[Function]}
     type="submit"
   >
