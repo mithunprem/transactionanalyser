@@ -2,15 +2,23 @@
   background-color: gray;
   color: white;
   border: 2px solid gray;
-  appearance: none;
   box-sizing: border-box;
   padding: 8px;
   text-transform: uppercase;
-  box-shadow: none;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 2.7px;
   text-align: center;
   width: 100%;
+
+  &:hover {
+    background-color: #737272;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    background-color: #676565;
+  }
 }

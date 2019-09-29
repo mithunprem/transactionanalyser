@@ -3,7 +3,7 @@ import React, { Fragment  } from 'react';
 const Balance = ({ balance }) => {
   return (
     <Fragment>
-      <p>{
+      <p className="m-3">{
           balance ?
             `Balance: $${String(balance.toFixed(2)).toLocaleString()}` :
             'Click calculate to show the balance.'

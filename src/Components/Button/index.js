@@ -6,7 +6,9 @@ import './button.scss';
 const Button = ({ type = "text", label, onClick = () => { } }) => {
   return (
     <Fragment>
-      <button className="button" type={type} onClick={onClick}>{label}</button>
+      <button className="mt-3 button" type={type} onClick={onClick}>
+        {label}
+      </button>
     </Fragment>
   )
 }
