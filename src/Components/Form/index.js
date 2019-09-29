@@ -6,6 +6,8 @@ import './form.scss';
 
 export default class Form extends Component {
   state = {
+    // Hard coded the form data to be shown by default for representational
+    // purpose.
     formData: {
       accountId: "ACC334455",
       fromDate: "2018-10-20T00:00",
@@ -13,6 +15,9 @@ export default class Form extends Component {
     }
   }
 
+  /**
+   * Change event handler for the form components.
+   */
   handleChange = event => {
     const { value, name } = event.target;
 

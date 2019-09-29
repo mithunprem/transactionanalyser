@@ -17,6 +17,7 @@ export default class TransactionAnalyser extends Component {
   }
 
   componentDidMount() {
+    // Set a loading flag and try to load the data in the csv file.
     this.setState(
       {
         isTransactionDetailsLoading: true
@@ -24,6 +25,7 @@ export default class TransactionAnalyser extends Component {
       async () => {
         const transactions = await parseCsvFile(transactionscsv);
         this.setState({
+          // Set the loading flag to false once data is loaded.
           isTransactionDetailsLoading: false,
           transactions
         });
@@ -34,7 +36,6 @@ export default class TransactionAnalyser extends Component {
   calculateBalance = formData => {
     const { transactions } = this.state;
     const balanceResult = balanceCalculator(transactions, formData);
-
     this.setState({ balanceResult });
   }
 
@@ -43,7 +44,7 @@ export default class TransactionAnalyser extends Component {
     return (
       <Fragment>
         <div className="transaction-analyser">
-          {
+          {/* Show the loading spinner till the data is available */
             isTransactionDetailsLoading ?
             (
               <Fragment>
