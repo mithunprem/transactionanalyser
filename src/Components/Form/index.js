@@ -27,6 +27,8 @@ export default class Form extends Component {
         [name]: value
       }
     }))
+
+    this.props.onChange();
   }
 
   onSubmit = event => {
@@ -60,5 +62,6 @@ export default class Form extends Component {
 }
 
 Form.propTypes = {
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func
 }
