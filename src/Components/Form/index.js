@@ -6,7 +6,7 @@ import './form.scss';
 
 export default class Form extends Component {
   state = {
-    form: {
+    formData: {
       accountId: "ACC334455",
       fromDate: "2018-10-20T00:00",
       toDate: "2018-10-20T19:00"
@@ -17,8 +17,8 @@ export default class Form extends Component {
     const { value, name } = event.target;
 
     this.setState(prevState => ({
-      form: {
-        ...prevState.form,
+      formData: {
+        ...prevState.formData,
         [name]: value
       }
     }))
@@ -26,18 +26,27 @@ export default class Form extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.form);
+    this.props.onSubmit(this.state.formData);
   }
 
   render() {
-    const { accountId, fromDate, toDate } = this.state.form;
+    const { accountId, fromDate, toDate } = this.state.formData;
 
     return (
       <Fragment>
         <form onSubmit={this.onSubmit}>
-          <Input type="text" placeholder="Account ID" name="accountId" value={accountId} onChange={this.handleChange} />
-          <Input type="datetime-local" placeholder="From" name="fromDate" value={fromDate} onChange={this.handleChange} />
-          <Input type="datetime-local" placeholder="To" name="toDate" value={toDate} onChange={this.handleChange} />
+          <Input
+            type="text" placeholder="Account ID"
+            name="accountId" value={accountId}
+            onChange={this.handleChange} />
+          <Input
+            type="datetime-local" placeholder="From"
+            name="fromDate" value={fromDate}
+            onChange={this.handleChange} />
+          <Input
+            type="datetime-local" placeholder="To"
+            name="toDate" value={toDate}
+            onChange={this.handleChange} />
           <Button type="submit" label="Calculate" />
         </form>
       </Fragment>
