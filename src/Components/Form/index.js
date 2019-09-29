@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import './form.scss';
@@ -42,4 +43,8 @@ export default class Form extends Component {
       </Fragment>
     )
   }
+}
+
+Form.propTypes = {
+  onSubmit: PropTypes.func
 }
