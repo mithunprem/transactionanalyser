@@ -12,10 +12,22 @@ const Balance = ({ balanceResult }) => {
   )
 }
 
-const renderSwitch = ({ status, message, balance }) => {
+const renderSwitch = ({ status, message, balance, includedTransactions }) => {
   switch(status) {
     case 'success':
-      return `Balance: $${String(balance.toFixed(2)).toLocaleString()}`;
+      const negativeSign = (balance < 0) ? '-' : '';
+      const balanceString = String(Math.abs(balance).toFixed(2)).toLocaleString();
+      return (
+        <Fragment>
+          <span>
+            {`Relative balance for the period is: ${negativeSign}$${balanceString}`}
+          </span>
+          <br />
+          <span>
+            {`Number of transactions included is: ${includedTransactions}`}
+          </span>
+        </Fragment>
+      )
     case 'error':
       return message;
     default:

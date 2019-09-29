@@ -15,7 +15,7 @@ import moment from 'moment';
   * that the caller component can display the balance or error accordingly.
 */
 const calculateBalance = ( transactions, formData ) => {
-  let balance = 0, status = '', message = '';
+  let balance = 0, status = '', message = '' ;
   const { accountId, fromDate, toDate } = formData;
 
   transactions =
@@ -31,7 +31,8 @@ const calculateBalance = ( transactions, formData ) => {
       )) === -1
   ));
 
-  if (transactions.length > 0) {
+  let includedTransactions = transactions.length;
+  if (includedTransactions > 0) {
     transactions.forEach(({ transactionType, amount }) => {
       if (transactionType === "PAYMENT") balance -= amount;
       if (transactionType === "REVERSAL") balance += amount;
@@ -43,7 +44,7 @@ const calculateBalance = ( transactions, formData ) => {
     message = 'No transactions found for the given criteria.';
   }
 
-  return { status, message, balance };
+  return { status, message, balance, includedTransactions };
 }
 
 export default calculateBalance;
