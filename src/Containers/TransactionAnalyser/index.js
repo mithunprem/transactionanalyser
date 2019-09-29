@@ -11,7 +11,7 @@ export default class TransactionAnalyser extends Component {
   state = {
     isTransactionDetailsLoading: false,
     transactions: [],
-    balance: 0
+    balanceResult: {}
   }
 
   componentDidMount() {
@@ -29,11 +29,11 @@ export default class TransactionAnalyser extends Component {
     );
   }
 
-  calculate = formData => {
+  calculateBalance = formData => {
     const { transactions } = this.state;
-    const balance = balanceCalculator(transactions, formData);
+    const balanceResult = balanceCalculator(transactions, formData);
 
-    this.setState({ balance });
+    this.setState({ balanceResult });
   }
 
   render() {
