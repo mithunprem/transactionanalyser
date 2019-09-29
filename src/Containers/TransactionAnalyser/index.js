@@ -48,7 +48,7 @@ export default class TransactionAnalyser extends Component {
             (
               <Fragment>
                 <Loader type="TailSpin" color="#ffffff" />
-                <h5 class="mt-3"> Loading transactions… </h5>
+                <h5 className="mt-3"> Loading transactions… </h5>
               </Fragment>
             ) :
             (
