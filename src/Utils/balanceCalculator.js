@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const calculate = ( transactions, formData ) => {
+const calculateBalance = ( transactions, formData ) => {
   let balance = 0, status = '', message = '';
   const { accountId, fromDate, toDate } = formData;
 
@@ -30,4 +30,4 @@ const calculate = ( transactions, formData ) => {
   return { status, message, balance };
 }
 
-export default calculate;
+export default calculateBalance;
