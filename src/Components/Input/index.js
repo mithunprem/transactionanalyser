@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './input.scss';
 
-const Input = ({ type = "text", placeholder, name, value, onChange = () => { } }) => {
+const Input = ({ type = "text", placeholder, name, value, hasError, onChange = () => { } }) => {
   return (
     <Fragment>
       <div className="input">
@@ -10,6 +10,7 @@ const Input = ({ type = "text", placeholder, name, value, onChange = () => { } }
         <br/>
         <input
           placeholder={placeholder}
+          className={hasError ? 'has-error' : ''}
           type={type}
           name={name}
           value={value}
@@ -24,6 +25,7 @@ Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
+  hasError: PropTypes.bool,
   value: PropTypes.string,
   onChange: PropTypes.func
 }

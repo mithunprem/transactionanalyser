@@ -22,8 +22,8 @@ const calculateBalance = ( transactions, formData ) => {
     transactions.filter(({ fromAccountId, createdAt, transactionId }) => (
       // Find records within the date range and matching the accountId
       fromAccountId === accountId &&
-      createdAt > moment(fromDate) &&
-      createdAt < moment(toDate) &&
+      createdAt > moment(fromDate, "DD/MM/YYYY, h:mm:ss") &&
+      createdAt < moment(toDate, "DD/MM/YYYY, h:mm:ss") &&
       // Remove those transactions which has a corresponding REVERSAL transaction
       transactions.findIndex(({ transactionType, relatedTransaction }) => (
         transactionType === "REVERSAL" &&

@@ -15,5 +15,9 @@
     font-weight: 400;
     background: white;
     margin: 8px 0 16px;
+
+    &.has-error {
+      outline: 3px solid red;
+    }
   }
 }

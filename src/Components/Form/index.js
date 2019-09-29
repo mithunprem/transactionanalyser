@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
+import { dateValidator, compareDates } from '../../Utils/dateValidator';
 import './form.scss';
 
 export default class Form extends Component {
@@ -10,9 +11,15 @@ export default class Form extends Component {
     // purpose.
     formData: {
       accountId: "ACC334455",
-      fromDate: "2018-10-20T00:00",
-      toDate: "2018-10-20T19:00"
-    }
+      fromDate: "20/10/2018 12:00:00",
+      toDate: "20/10/2018 19:00:00"
+    },
+    hasError: false,
+    formErrors: {
+      fromDate: false,
+      toDate: false
+    },
+    errorMessage: ''
   }
 
   /**
@@ -20,12 +27,24 @@ export default class Form extends Component {
    */
   handleChange = event => {
     const { value, name } = event.target;
+    let { formErrors, errorMessage, hasError } = this.state;
+
+    if (name === 'fromDate' || name === 'toDate') {
+      const isValid  = dateValidator(value);
+      // Set the error to true if isValid is false.
+      formErrors[name] = !isValid;
+      errorMessage = 'The date is not in a valid format';
+      hasError = !isValid;
+    }
 
     this.setState(prevState => ({
       formData: {
         ...prevState.formData,
         [name]: value
-      }
+      },
+      formErrors,
+      errorMessage,
+      hasError
     }))
 
     this.props.onChange();
@@ -33,11 +52,26 @@ export default class Form extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.formData);
+
+    const { formData, formErrors } = this.state;
+    const { fromDate, toDate } = formData;
+    const isValid = compareDates(fromDate, toDate);
+
+    if (isValid) {
+      this.props.onSubmit(this.state.formData);
+    } else {
+      formErrors.fromDate = true;
+      this.setState({
+        formErrors,
+        errorMessage: 'From date cannot be greater than To date',
+        hasError: true
+      });
+    }
   }
 
   render() {
-    const { accountId, fromDate, toDate } = this.state.formData;
+    const { formData, formErrors, errorMessage, hasError } = this.state;
+    const { accountId, fromDate, toDate } = formData;
 
     return (
       <Fragment>
@@ -47,14 +81,26 @@ export default class Form extends Component {
             name="accountId" value={accountId}
             onChange={this.handleChange} />
           <Input
-            type="datetime-local" placeholder="From"
+            type="text" placeholder="From Date"
             name="fromDate" value={fromDate}
+            hasError={formErrors.fromDate}
             onChange={this.handleChange} />
           <Input
-            type="datetime-local" placeholder="To"
+            type="text" placeholder="To Date"
             name="toDate" value={toDate}
+            hasError={formErrors.toDate}
             onChange={this.handleChange} />
-          <Button type="submit" label="Calculate" />
+          <div className="m-2">
+            {
+              hasError ?
+                <span className="p-2 alert alert-danger" role="alert">
+                  {errorMessage}
+                </span> : ''
+            }
+          </div>
+          <Button
+            disabled={formErrors.fromDate || formErrors.toDate}
+            type="submit" label="Calculate" />
         </form>
       </Fragment>
     )
