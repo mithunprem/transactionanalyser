@@ -20,9 +20,10 @@ const calculateBalance = ( transactions, formData ) => {
   const { accountId, fromDate, toDate } = formData;
 
   transactions =
-    transactions.filter(({ fromAccountId, createdAt, transactionId }) => (
-      // Find records within the date range and matching the accountId
-      fromAccountId === accountId &&
+    transactions.filter(({ transactionId, fromAccountId, toAccountId, createdAt, transactionType }) => (
+      // Find all PAYMENT records within the date range and matching the accountId
+      transactionType === "PAYMENT" &&
+      (fromAccountId === accountId || toAccountId === accountId) &&
       createdAt.diff(moment(fromDate, defaultDateFormat)) >= 0 &&
       createdAt.diff(moment(toDate, defaultDateFormat)) <= 0 &&
       // Remove those transactions which has a corresponding REVERSAL transaction
@@ -34,9 +35,14 @@ const calculateBalance = ( transactions, formData ) => {
 
   let includedTransactions = transactions.length;
   if (includedTransactions > 0) {
-    transactions.forEach(({ transactionType, amount }) => {
-      if (transactionType === "PAYMENT") balance -= amount;
-      if (transactionType === "REVERSAL") balance += amount;
+    transactions.forEach(({ fromAccountId, toAccountId, transactionType, amount }) => {
+      // If the account is a from account, then the transaction indicates a debit.
+      // And if it is a to account, then the transaction indicates a credit.
+      if (accountId === fromAccountId) {
+        balance -= amount;
+      } else {
+        balance += amount;
+      }
     });
     status = 'success';
     message = 'Balance calculated';
