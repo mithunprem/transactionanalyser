@@ -8,7 +8,11 @@ import './form.scss';
 
 export default class Form extends Component {
   state = {
-    formData: {},
+    formData: {
+      accountId: '',
+      fromDate: '',
+      toDate: ''
+    },
     formErrors: {
       fromDate: false,
       toDate: false
@@ -64,8 +68,9 @@ export default class Form extends Component {
   render() {
     const { formData, formErrors, errorMessage, hasDateRangeError } = this.state;
     const { accountId, fromDate, toDate } = formData;
+    const formHasData = accountId.length > 0 && fromDate.length > 0 && toDate.length > 0;
     const shouldDisableCalculateButton =
-       hasDateRangeError || formErrors.fromDate || formErrors.toDate;
+       !formHasData || hasDateRangeError || formErrors.fromDate || formErrors.toDate;
 
     return (
       <Fragment>
