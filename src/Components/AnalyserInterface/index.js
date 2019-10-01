@@ -30,7 +30,7 @@ export default class AnalyserInterface extends Component {
     return (
       <Fragment>
         <h2>Relative account balance</h2>
-        <p>Please enter the following details.</p>
+        <span className="m-2">Please enter the following details.</span>
         <Form onSubmit={this.calculateBalance} onChange={this.handleFormChange} />
         <Balance balanceResult={balanceResult} />
       </Fragment>
