@@ -69,13 +69,23 @@ export default class Form extends Component {
   render() {
     const { formData, formErrors, errorMessage, hasDateRangeError } = this.state;
     const { accountId, fromDate, toDate } = formData;
+    const shouldDisableCalculateButton =
+       hasDateRangeError || formErrors.fromDate || formErrors.toDate;
+
     return (
       <Fragment>
         <form onSubmit={this.onSubmit} id="form">
-          <Input placeholder="Account ID" name="accountId"  value={accountId} onChange={this.handleChange} />
-          <DateView placeholder="From Date" name="fromDate" value={fromDate} dateRangeErrorMessage={errorMessage} onChange={this.handleChange} />
-          <DateView placeholder="To Date" name="toDate" value={toDate} onChange={this.handleChange} />
-          <Button disabled={ hasDateRangeError || formErrors.fromDate || formErrors.toDate } type="submit" label="Calculate" />
+          <Input
+            placeholder="Account ID" name="accountId"
+            value={accountId} onChange={this.handleChange} />
+          <DateView
+            placeholder="From Date" name="fromDate" value={fromDate}
+            dateRangeErrorMessage={errorMessage} onChange={this.handleChange} />
+          <DateView
+            placeholder="To Date" name="toDate" value={toDate}
+            onChange={this.handleChange} />
+          <Button
+            disabled={ shouldDisableCalculateButton } type="submit" label="Calculate" />
         </form>
       </Fragment>
     )
