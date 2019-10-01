@@ -3,11 +3,11 @@ import { Tooltip as ErrorTooltip } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './input.scss';
 
-const Input = ({ type = "text", placeholder, name, value, showError, errorMessage, onChange = () => { } }) => {
+const Input = ({ type = "text", label, placeholder, name, value, showError, errorMessage, onChange = () => { } }) => {
   return (
     <Fragment>
       <div className="input">
-        <label htmlFor={name}>{placeholder}</label>
+        <label htmlFor={name}>{label}</label>
         <br/>
         <input
           id={name}
@@ -25,6 +25,7 @@ const Input = ({ type = "text", placeholder, name, value, showError, errorMessag
 }
 
 Input.propTypes = {
+  label: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,

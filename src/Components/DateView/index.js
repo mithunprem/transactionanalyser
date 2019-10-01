@@ -37,14 +37,14 @@ export default class DateView extends Component {
   }
 
   render() {
-    const { placeholder, name, value } = this.props;
+    const { label, placeholder, name, value } = this.props;
     const { hasError, invalidDateErrorMessage, dateRangeErrorMessage } = this.state;
     const showError = hasError || dateRangeErrorMessage.length > 0;
     return (
       <Fragment>
         <Input
-          placeholder={placeholder} name={name} value={value}
-          onChange={this.handleChange} showError={showError} 
+          label={label} placeholder={placeholder} name={name} value={value}
+          onChange={this.handleChange} showError={showError}
           errorMessage={dateRangeErrorMessage || invalidDateErrorMessage}
         />
       </Fragment>
@@ -53,6 +53,7 @@ export default class DateView extends Component {
 }
 
 DateView.propTypes = {
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,

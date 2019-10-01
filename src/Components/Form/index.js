@@ -8,12 +8,7 @@ import './form.scss';
 
 export default class Form extends Component {
   state = {
-    // Hard coded the form data to be shown by default for representational purpose.
-    formData: {
-      accountId: "ACC334455",
-      fromDate: "20/10/2018 12:00:00",
-      toDate: "20/10/2018 19:00:00"
-    },
+    formData: {},
     formErrors: {
       fromDate: false,
       toDate: false
@@ -79,10 +74,10 @@ export default class Form extends Component {
             placeholder="Account ID" name="accountId"
             value={accountId} onChange={this.handleChange} />
           <DateView
-            placeholder="From Date" name="fromDate" value={fromDate}
+            label="From Date" placeholder="DD/MM/YYYY HH:MM:SS" name="fromDate" value={fromDate}
             dateRangeErrorMessage={errorMessage} onChange={this.handleChange} />
           <DateView
-            placeholder="To Date" name="toDate" value={toDate}
+            label="To Date" placeholder="DD/MM/YYYY HH:MM:SS" name="toDate" value={toDate}
             onChange={this.handleChange} />
           <Button
             disabled={ shouldDisableCalculateButton } type="submit" label="Calculate" />
