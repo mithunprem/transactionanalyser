@@ -23,12 +23,20 @@ const Balance = ({ balanceResult }) => {
 const balanceRenderSwitch = ({ status, message, balance, includedTransactions }) => {
   switch(status) {
     case 'success':
-      const negativeSign = (balance < 0) ? '-' : '';
+      let negativeSign = '';
+      let balanceFigureClass = 'balance-positive';
+
+      if (balance < 0) {
+        negativeSign = '-';
+        balanceFigureClass = 'balance-negative';
+      }
+
       const balanceString = String(Math.abs(balance).toFixed(2)).toLocaleString();
       return (
         <Fragment>
           <span>
-            {`Relative balance for the period is: ${negativeSign}$${balanceString}`}
+            Relative balance for the period is:
+            <span className={balanceFigureClass}> {`${negativeSign}$${balanceString}`}</span>
           </span>
           <br />
           <span>

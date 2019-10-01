@@ -1,3 +1,11 @@
 .balance {
   height: 50px;
+
+  .balance-negative {
+    color: #ff5e5e;
+  }
+
+  .balance-positive {
+    color: #adff2f;
+  }
 }
