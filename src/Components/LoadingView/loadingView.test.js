@@ -4,7 +4,7 @@ import LoadingView from '../../Components/LoadingView';
 
 describe("LoadingView", () => {
   test("should render without throwing an error", () => {
-    const loadingView = create(<LoadingView />).toJSON()
-    expect(loadingView).toMatchSnapshot()
+    const loadingView = create(<LoadingView />).toJSON();
+    expect(loadingView).toMatchSnapshot();
   });
 });

@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button should render a disabled button when a disabled prop is passed to the component 1`] = `
+<button
+  className="mt-3 button"
+  disabled={true}
+  onClick={[Function]}
+  type="submit"
+>
+  Test
+</button>
+`;
+
 exports[`Button should render without throwing an error 1`] = `
 <button
   className="mt-3 button"

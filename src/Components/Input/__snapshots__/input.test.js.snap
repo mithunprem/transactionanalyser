@@ -5,14 +5,19 @@ exports[`Input should render without throwing an error 1`] = `
   className="input"
 >
   <label
-    htmlFor="test"
-  />
+    htmlFor="input"
+  >
+    test input
+  </label>
   <br />
   <input
     className=""
-    name="test"
+    id="input"
+    name="input"
     onChange={[Function]}
+    placeholder="test input"
     type="text"
+    value="test"
   />
 </div>
 `;
