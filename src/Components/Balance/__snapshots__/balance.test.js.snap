@@ -21,7 +21,13 @@ exports[`Balance should render without throwing an error for successful balance 
   className="m-3 balance"
 >
   <span>
-    Relative balance for the period is: $10.00
+    Relative balance for the period is:
+    <span
+      className="balance-positive"
+    >
+       
+      $10.00
+    </span>
   </span>
   <br />
   <span>

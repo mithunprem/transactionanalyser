@@ -6,9 +6,7 @@ exports[`Input should render without throwing an error 1`] = `
 >
   <label
     htmlFor="input"
-  >
-    test input
-  </label>
+  />
   <br />
   <input
     className=""
