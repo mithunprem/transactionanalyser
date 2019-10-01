@@ -1,18 +1,26 @@
 import React, { Fragment  } from 'react';
+import './balance.scss';
 
 const Balance = ({ balanceResult }) => {
   return (
     <Fragment>
-      <p className="m-3">
+      <p className="m-3 balance">
         {
-          renderSwitch(balanceResult)
+          balanceRenderSwitch(balanceResult)
         }
       </p>
     </Fragment>
   )
 }
 
-const renderSwitch = ({ status, message, balance, includedTransactions }) => {
+/**
+  Renders the balance figure to be displayed based on the result.
+  If the computation is success, then display the result figure and also
+  the number of transactions that were included in the computation.
+  If the computation resulted in error, then display the error message.
+  For the default case, ie on page load, show the default string.
+*/
+const balanceRenderSwitch = ({ status, message, balance, includedTransactions }) => {
   switch(status) {
     case 'success':
       const negativeSign = (balance < 0) ? '-' : '';
@@ -31,7 +39,7 @@ const renderSwitch = ({ status, message, balance, includedTransactions }) => {
     case 'error':
       return message;
     default:
-      return 'Click calculate to show the balance.';
+      return 'Click calculate to show the balance';
   }
 }
 
