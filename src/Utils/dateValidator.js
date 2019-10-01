@@ -13,8 +13,7 @@ export const dateValidator = dateValue => {
  * after the from data.
  */
 export const compareDates = ( fromDate, toDate ) => {
-  const dateFormat = "DD/MM/YYYY hh:mm:ss";
-  return (moment(toDate, dateFormat)).isSameOrAfter(moment(fromDate, dateFormat));
+  return (moment(toDate, defaultDateFormat)).isSameOrAfter(moment(fromDate, defaultDateFormat));
 }
 
 /**
@@ -24,5 +23,7 @@ const validDateFormats = [
   "DD/MM/YYYY",
   "DD-MM-YYYY",
   "DD/MM/YYYY HH:mm:ss",
-  "DD-MM-YYYY HH:mm:ss",
+  "DD-MM-YYYY HH:mm:ss"
 ]
+
+export const defaultDateFormat = "DD/MM/YYYY HH:mm:ss";

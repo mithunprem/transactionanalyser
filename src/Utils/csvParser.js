@@ -1,5 +1,6 @@
 import Papa from 'papaparse';
 import moment from 'moment';
+import { defaultDateFormat } from './dateValidator';
 
 /**
   * Parses a csv file at the filePath provided using the papaparse library
@@ -18,7 +19,7 @@ const parseCsvFile = filePath => {
       skipEmptyLines: true,
       transform: (value, header) => {
         return (header === 'createdAt') ?
-          moment(value, "DD/MM/YYYY, h:mm:ss") : value;
+          moment(value, defaultDateFormat) : value;
       },
       dynamicTyping: true,
       complete: results => {

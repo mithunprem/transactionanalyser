@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { defaultDateFormat } from './dateValidator';
 
 /**
   * Calculates the balance amount based on the user input in form.
@@ -22,8 +23,8 @@ const calculateBalance = ( transactions, formData ) => {
     transactions.filter(({ fromAccountId, createdAt, transactionId }) => (
       // Find records within the date range and matching the accountId
       fromAccountId === accountId &&
-      createdAt > moment(fromDate, "DD/MM/YYYY, h:mm:ss") &&
-      createdAt < moment(toDate, "DD/MM/YYYY, h:mm:ss") &&
+      createdAt.diff(moment(fromDate, defaultDateFormat)) >= 0 &&
+      createdAt.diff(moment(toDate, defaultDateFormat)) <= 0 &&
       // Remove those transactions which has a corresponding REVERSAL transaction
       transactions.findIndex(({ transactionType, relatedTransaction }) => (
         transactionType === "REVERSAL" &&
