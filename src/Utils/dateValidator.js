@@ -5,7 +5,9 @@ import moment from 'moment';
  * with the set of valid date formats.
  */
 export const dateValidator = dateValue => {
-  return moment(dateValue, validDateFormats, true).isValid();
+  const isValidDate = moment(dateValue, validDateFormats, true).isValid();
+  const errorMessage = isValidDate ? '' : 'Date is not in a valid format';
+  return { isValidDate, errorMessage };
 }
 
 /**
