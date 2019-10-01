@@ -71,7 +71,7 @@ export default class Form extends Component {
       <Fragment>
         <form onSubmit={this.onSubmit} id="form">
           <Input
-            placeholder="Account ID" name="accountId"
+            label="Account ID" placeholder="Account ID" name="accountId"
             value={accountId} onChange={this.handleChange} />
           <DateView
             label="From Date" placeholder="DD/MM/YYYY HH:MM:SS" name="fromDate" value={fromDate}
