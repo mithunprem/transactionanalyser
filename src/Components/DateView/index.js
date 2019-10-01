@@ -6,7 +6,16 @@ import { dateValidator } from '../../Utils/dateValidator';
 export default class DateView extends Component {
 
   state = {
-    hasError: false
+    hasError: false,
+    errorMessage: '',
+    dateRangeError: ''
+  }
+
+  componentDidUpdate(prevProps) {
+    const { dateRangeError } = this.props;
+    if(dateRangeError !== prevProps.dateRangeError) {
+      this.setState({ dateRangeError });
+    }
   }
 
   /**
@@ -24,12 +33,13 @@ export default class DateView extends Component {
 
   render() {
     const { placeholder, name, value } = this.props;
-    const { hasError, errorMessage } = this.state;
+    const { hasError, errorMessage, dateRangeError } = this.state;
+    const showError = hasError || dateRangeError.length > 0;
     return (
       <Fragment>
         <Input
           placeholder={placeholder} name={name} value={value}
-          hasError={hasError} errorMessage={errorMessage} onChange={this.handleChange}
+          showError={showError} errorMessage={dateRangeError || errorMessage} onChange={this.handleChange}
         />
       </Fragment>
     )
@@ -40,5 +50,6 @@ DateView.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
+  dateRangeError: PropTypes.string,
   onChange: PropTypes.func
 }

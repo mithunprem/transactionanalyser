@@ -3,7 +3,7 @@ import { Tooltip } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './input.scss';
 
-const Input = ({ type = "text", placeholder, name, value, hasError, errorMessage, onChange = () => { } }) => {
+const Input = ({ type = "text", placeholder, name, value, showError, errorMessage, onChange = () => { } }) => {
   return (
     <Fragment>
       <div className="input">
@@ -12,14 +12,14 @@ const Input = ({ type = "text", placeholder, name, value, hasError, errorMessage
         <input
           id={name}
           placeholder={placeholder}
-          className={hasError ? 'has-error' : ''}
+          className={showError ? 'has-error' : ''}
           type={type}
           name={name}
           value={value}
           onChange={onChange}
         />
       </div>
-      <Tooltip placement="top" target={name} isOpen={hasError}>{errorMessage}</Tooltip>
+      <Tooltip placement="top" target={name} fade={false} isOpen={showError}>{errorMessage}</Tooltip>
     </Fragment>
   )
 }
@@ -28,7 +28,7 @@ Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
-  hasError: PropTypes.bool,
+  showError: PropTypes.bool,
   value: PropTypes.string,
   onChange: PropTypes.func
 }

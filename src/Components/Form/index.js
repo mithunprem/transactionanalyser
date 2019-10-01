@@ -8,14 +8,17 @@ import './form.scss';
 
 export default class Form extends Component {
   state = {
-    // Hard coded the form data to be shown by default for representational
-    // purpose.
+    // Hard coded the form data to be shown by default for representational purpose.
     formData: {
       accountId: "ACC334455",
       fromDate: "20/10/2018 12:00:00",
       toDate: "20/10/2018 19:00:00"
     },
-    hasError: false,
+    formErrors: {
+      fromDate: false,
+      toDate: false
+    },
+    hasDateRangeError: false,
     errorMessage: ''
   }
 
@@ -24,13 +27,18 @@ export default class Form extends Component {
    */
   handleChange = (event, isValidChange) => {
     const { value, name } = event.target;
+    const { formErrors } = this.state;
+
+    formErrors[name] = !isValidChange;
 
     this.setState(prevState => ({
       formData: {
         ...prevState.formData,
         [name]: value
       },
-      hasError: !isValidChange
+      formErrors,
+      errorMessage: '',
+      hasDateRangeError: false
     }))
 
     this.props.onChange();
@@ -39,31 +47,31 @@ export default class Form extends Component {
   onSubmit = event => {
     event.preventDefault();
 
-    const { formData } = this.state;
+    const { formData, formErrors } = this.state;
     const { fromDate, toDate } = formData;
-    const isValid = compareDates(fromDate, toDate);
+    const isValidDateRange = compareDates(fromDate, toDate);
 
-    if (isValid) {
-      this.props.onSubmit(this.state.formData);
+    if(isValidDateRange) {
+      this.props.onSubmit(formData);
     } else {
       this.setState({
-        errorMessage: 'From date cannot be greater than To date',
-        hasError: true
+        hasDateRangeError: true,
+        formErrors,
+        errorMessage: 'From date cannot be greater than To date'
       });
     }
   }
 
   render() {
-    const { formData, errorMessage, hasError } = this.state;
+    const { formData, formErrors, errorMessage, hasDateRangeError } = this.state;
     const { accountId, fromDate, toDate } = formData;
-
     return (
       <Fragment>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} id="form">
           <Input placeholder="Account ID" name="accountId"  value={accountId} onChange={this.handleChange} />
-          <DateView placeholder="From Date" name="fromDate" value={fromDate} onChange={this.handleChange} />
+          <DateView placeholder="From Date" name="fromDate" value={fromDate} dateRangeError={errorMessage} onChange={this.handleChange} />
           <DateView placeholder="To Date" name="toDate" value={toDate} onChange={this.handleChange} />
-          <Button disabled={hasError} type="submit" label="Calculate" />
+          <Button disabled={ hasDateRangeError || formErrors.fromDate || formErrors.toDate } type="submit" label="Calculate" />
         </form>
       </Fragment>
     )
