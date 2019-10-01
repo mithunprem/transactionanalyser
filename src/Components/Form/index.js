@@ -23,7 +23,8 @@ export default class Form extends Component {
   }
 
   /**
-   * Change event handler for the form components.
+   * Change event handler for the form components. Validate and set the changes
+   * to the state and call the onChange method from the caller component.
    */
   handleChange = (event, isValidChange) => {
     const { value, name } = event.target;
@@ -44,10 +45,14 @@ export default class Form extends Component {
     this.props.onChange();
   }
 
+  /**
+   * Validate the form data on submit and if the data is valid, call the
+   * onSubmit method passed from the parent component.
+   */
   onSubmit = event => {
     event.preventDefault();
 
-    const { formData, formErrors } = this.state;
+    const { formData } = this.state;
     const { fromDate, toDate } = formData;
     const isValidDateRange = compareDates(fromDate, toDate);
 
@@ -56,7 +61,6 @@ export default class Form extends Component {
     } else {
       this.setState({
         hasDateRangeError: true,
-        formErrors,
         errorMessage: 'From date cannot be greater than To date'
       });
     }
@@ -69,7 +73,7 @@ export default class Form extends Component {
       <Fragment>
         <form onSubmit={this.onSubmit} id="form">
           <Input placeholder="Account ID" name="accountId"  value={accountId} onChange={this.handleChange} />
-          <DateView placeholder="From Date" name="fromDate" value={fromDate} dateRangeError={errorMessage} onChange={this.handleChange} />
+          <DateView placeholder="From Date" name="fromDate" value={fromDate} dateRangeErrorMessage={errorMessage} onChange={this.handleChange} />
           <DateView placeholder="To Date" name="toDate" value={toDate} onChange={this.handleChange} />
           <Button disabled={ hasDateRangeError || formErrors.fromDate || formErrors.toDate } type="submit" label="Calculate" />
         </form>

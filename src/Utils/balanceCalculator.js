@@ -4,14 +4,14 @@ import { defaultDateFormat } from './dateValidator';
 /**
   * Calculates the balance amount based on the user input in form.
 
-  * All the transactions data available will be searched first to find valid
-  * records that fall within the date range specified and with the matching
-  * accountId. While getting the list, those records will be omitted which
-  * has a corresponding 'REVERSAL' transaction at any time.
-
-  * Once the transactions subset that matches the criteria is obtained, traverse
-  * the array and calculate the balance amount based on the transaction type.
-
+  * All the transactions data will be searched first to find valid records that
+  * fall within the date range specified and with the matching accountId.
+  *
+  * While getting the list, those records will be omitted which has a
+  * corresponding 'REVERSAL' transaction at any time. Once the transactions
+  * subset that matches the input criteria is obtained, traverse the array and
+  * calculate the balance amount based on the transaction type.
+  *
   * Return a success/error status and message along with the balance amount so
   * that the caller component can display the balance or error accordingly.
 */

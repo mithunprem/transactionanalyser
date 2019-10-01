@@ -3,7 +3,6 @@ import Form from '../../Components/Form';
 import Balance from '../../Components/Balance';
 import balanceCalculator from '../../Utils/balanceCalculator';
 
-
 export default class AnalyserInterface extends Component {
 
   state = {

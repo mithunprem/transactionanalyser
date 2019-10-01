@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Tooltip } from 'reactstrap';
+import { Tooltip as ErrorTooltip } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './input.scss';
 
@@ -18,8 +18,8 @@ const Input = ({ type = "text", placeholder, name, value, showError, errorMessag
           value={value}
           onChange={onChange}
         />
+        <ErrorTooltip placement="top" target={name} fade={false} isOpen={showError}>{errorMessage}</ErrorTooltip>
       </div>
-      <Tooltip placement="top" target={name} fade={false} isOpen={showError}>{errorMessage}</Tooltip>
     </Fragment>
   )
 }

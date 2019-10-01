@@ -7,14 +7,14 @@ export default class DateView extends Component {
 
   state = {
     hasError: false,
-    errorMessage: '',
-    dateRangeError: ''
+    invalidDateErrorMessage: '',
+    dateRangeErrorMessage: ''
   }
 
   componentDidUpdate(prevProps) {
-    const { dateRangeError } = this.props;
-    if(dateRangeError !== prevProps.dateRangeError) {
-      this.setState({ dateRangeError });
+    const { dateRangeErrorMessage } = this.props;
+    if(dateRangeErrorMessage !== prevProps.dateRangeErrorMessage) {
+      this.setState({ dateRangeErrorMessage });
     }
   }
 
@@ -25,21 +25,27 @@ export default class DateView extends Component {
   handleChange = event => {
     const { value } = event.target;
     const { isValidDate, errorMessage } = dateValidator(value);
+
     // Set hasError to true if the date is not valid.
-    this.setState({ hasError: !isValidDate, errorMessage });
+    this.setState({
+      hasError: !isValidDate,
+      invalidDateErrorMessage: errorMessage
+    });
+
     // Call the onChange function of the parent and pass the event.
     this.props.onChange(event, isValidDate, errorMessage);
   }
 
   render() {
     const { placeholder, name, value } = this.props;
-    const { hasError, errorMessage, dateRangeError } = this.state;
-    const showError = hasError || dateRangeError.length > 0;
+    const { hasError, invalidDateErrorMessage, dateRangeErrorMessage } = this.state;
+    const showError = hasError || dateRangeErrorMessage.length > 0;
     return (
       <Fragment>
         <Input
           placeholder={placeholder} name={name} value={value}
-          showError={showError} errorMessage={dateRangeError || errorMessage} onChange={this.handleChange}
+          onChange={this.handleChange} showError={showError} 
+          errorMessage={dateRangeErrorMessage || invalidDateErrorMessage}
         />
       </Fragment>
     )
@@ -50,6 +56,6 @@ DateView.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
-  dateRangeError: PropTypes.string,
+  dateRangeErrorMessage: PropTypes.string,
   onChange: PropTypes.func
 }

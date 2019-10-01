@@ -18,7 +18,7 @@ const Balance = ({ balanceResult }) => {
   If the computation is success, then display the result figure and also
   the number of transactions that were included in the computation.
   If the computation resulted in error, then display the error message.
-  For the default case, ie on page load, show the default string.
+  For the default case, i.e on page load, show the default string.
 */
 const balanceRenderSwitch = ({ status, message, balance, includedTransactions }) => {
   switch(status) {
