@@ -1,19 +1,15 @@
 import React, { Component, Fragment  } from 'react';
-import Loader from 'react-loader-spinner';
-import Form from '../../Components/Form';
-import Balance from '../../Components/Balance';
+import LoadingView from '../../Components/LoadingView';
+import AnalyserInterface from '../../Components/AnalyserInterface';
 import parseCsvFile from '../../Utils/csvParser';
-import balanceCalculator from '../../Utils/balanceCalculator';
 import transactionscsv from '../../Data/transactions.csv';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import './transactionAnalyser.scss';
 
 export default class TransactionAnalyser extends Component {
 
   state = {
     isTransactionDetailsLoading: false,
-    transactions: [],
-    balanceResult: {}
+    transactions: []
   }
 
   componentDidMount() {
@@ -33,42 +29,14 @@ export default class TransactionAnalyser extends Component {
     );
   }
 
-  calculateBalance = formData => {
-    const { transactions } = this.state;
-    const balanceResult = balanceCalculator(transactions, formData);
-    this.setState({ balanceResult });
-  }
-
-  /**
-  * As soon as any component in form changes it value, reset the balanceResult
-  * so that the Balance view will remove the results shown as part of the
-  * previous calculation and reset to the default value.
-  */
-  handleFormChange = () => {
-    this.setState({ balanceResult: {} });
-  }
-
   render() {
-    const { isTransactionDetailsLoading, balanceResult } = this.state;
+    const { isTransactionDetailsLoading, transactions } = this.state;
     return (
       <Fragment>
         <div className="transaction-analyser">
           {/* Show the loading spinner till the data is available */
             isTransactionDetailsLoading ?
-            (
-              <Fragment>
-                <Loader type="TailSpin" color="#ffffff" />
-                <h5 className="mt-3"> Loading transactions… </h5>
-              </Fragment>
-            ) :
-            (
-              <Fragment>
-                <h2>Relative account balance</h2>
-                <p>Please enter the following details.</p>
-                <Form onSubmit={this.calculateBalance} onChange={this.handleFormChange} />
-                <Balance balanceResult={balanceResult} />
-              </Fragment>
-            )
+              <LoadingView /> : <AnalyserInterface transactions={transactions} />
           }
         </div>
       </Fragment>
