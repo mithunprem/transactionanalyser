@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Balance should render without throwing an error for default case 1`] = `
+<p
+  className="m-3 balance"
+>
+  Click calculate to show the balance
+</p>
+`;
+
+exports[`Balance should render without throwing an error for no transactions found scenario 1`] = `
+<p
+  className="m-3 balance"
+>
+  No transactions found
+</p>
+`;
+
+exports[`Balance should render without throwing an error for successful balance calculation 1`] = `
+<p
+  className="m-3 balance"
+>
+  <span>
+    Relative balance for the period is: $10.00
+  </span>
+  <br />
+  <span>
+    Number of transactions included is: 2
+  </span>
+</p>
+`;
